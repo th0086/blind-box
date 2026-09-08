@@ -1,0 +1,19 @@
+{
+  "name": "blind-box",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter ./frontend --filter ./backend run dev",
+    "dev:frontend": "pnpm --filter ./frontend run dev",
+    "dev:backend": "pnpm --filter ./backend run dev",
+    "build": "pnpm --filter ./backend run build && pnpm --filter ./frontend run build",
+    "lint": "pnpm --filter ./backend run lint && pnpm --filter ./frontend run lint",
+    "vm:up": "cd deploy && docker compose -f docker-compose.vm.yml up -d --build",
+    "vm:down": "cd deploy && docker compose -f docker-compose.vm.yml down",
+    "vm:logs": "cd deploy && docker compose -f docker-compose.vm.yml logs -f"
+  }
+}
