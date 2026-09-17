@@ -345,7 +345,7 @@ export default function HomePage() {
             {teaserPrizes.length ? (
               teaserPrizes.map((prize) => (
                 <div key={prize._id} className="bb-teaser-item">
-                  <Image src={getPrizeImage(prize)} alt={prize.name} width={62} height={44} />
+                  <img src={getPrizeImage(prize)} alt={prize.name} width={62} height={44} style={{ objectFit: 'contain' }} />
                   <div>
                     <strong>{prize.name}</strong>
                     <small>Quantity: {prize.value}</small>
@@ -355,7 +355,7 @@ export default function HomePage() {
               ))
             ) : (
               <div className="bb-teaser-item">
-                <Image src="/bonus.png" alt="Bonus" width={62} height={44} />
+                <img src="/bonus.png" alt="Bonus" width={62} height={44} style={{ objectFit: 'contain' }} />
                 <div>
                   <strong>10,000 KES Bonus</strong>
                   <small>Quantity: -</small>

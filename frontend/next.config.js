@@ -12,6 +12,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: spacesHostname,
       },
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      },
     ],
   },
   webpack: (config, { dev }) => {
