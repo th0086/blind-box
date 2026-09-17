@@ -1,20 +1,6 @@
 name: blind-box
 
 services:
-  mongo:
-    image: mongo:7
-    container_name: blind-box-mongo
-    restart: unless-stopped
-    env_file:
-      - ../.env
-    volumes:
-      - mongo_data:/data/db
-    healthcheck:
-      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
   backend:
     build:
       context: ..
@@ -23,9 +9,10 @@ services:
     restart: unless-stopped
     env_file:
       - ../.env
-    depends_on:
-      mongo:
-        condition: service_healthy
+    environment:
+      MONGODB_URI: mongodb://mongo-shared:27017/blindbox
+    networks:
+      - vm_shared
 
   frontend:
     build:
@@ -38,6 +25,8 @@ services:
     restart: unless-stopped
     depends_on:
       - backend
+    networks:
+      - vm_shared
 
   nginx:
     image: nginx:1.27-alpine
@@ -50,6 +39,10 @@ services:
       - "127.0.0.1:8082:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - vm_shared
 
-volumes:
-  mongo_data:
+networks:
+  vm_shared:
+    name: vm-shared
+    external: true
