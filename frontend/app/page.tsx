@@ -369,7 +369,7 @@ export default function HomePage() {
 
       <div className="invite-panel">
         <Image src="/invite.png" alt="Invite section background" fill className="invite-bg-image" sizes="(max-width: 720px) 96vw, 92vw" />
-        <a href="https://mouse-lottery.weedza.co/" className="invite-hotspot" target="_blank" rel="noreferrer">
+        <a href="/login" className="invite-hotspot">
           Generate Invite Link
         </a>
       </div>
