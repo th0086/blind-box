@@ -12,6 +12,7 @@ services:
     environment:
       MONGODB_URI: mongodb://mongo-shared:27017/blindbox
     networks:
+      - app
       - vm_shared
 
   frontend:
@@ -26,7 +27,7 @@ services:
     depends_on:
       - backend
     networks:
-      - vm_shared
+      - app
 
   nginx:
     image: nginx:1.27-alpine
@@ -40,9 +41,11 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
-      - vm_shared
+      - app
 
 networks:
+  app:
+    name: blind-box-app
   vm_shared:
     name: vm-shared
     external: true
